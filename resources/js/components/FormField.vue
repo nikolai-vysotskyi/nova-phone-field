@@ -1,18 +1,18 @@
 <template>
     <DefaultField
-        :field="field"
+        :field="currentField"
         :errors="errors"
         :show-help-text="showHelpText"
         :full-width-content="fullWidthContent"
     >
         <template #field>
             <input
-                :id="field.name"
+                :id="currentField.name"
                 type="text"
                 ref="input"
                 class="w-full form-control form-input form-input-bordered"
                 :class="errorClasses"
-                :placeholder="field.name"
+                :placeholder="currentField.name"
                 v-model="value"
             />
         </template>
@@ -22,11 +22,11 @@
 <script>
 import PhoneMasks from '../data/phone-masks.json';
 import Inputmask from 'inputmask';
-import { FormField, HandlesValidationErrors } from 'laravel-nova';
+import { DependentFormField, HandlesValidationErrors } from 'laravel-nova';
 import { map, filter } from 'lodash';
 
 export default {
-    mixins: [FormField, HandlesValidationErrors],
+    mixins: [DependentFormField, HandlesValidationErrors],
     props: ['resourceName', 'resourceId', 'field'],
 
     data() {
